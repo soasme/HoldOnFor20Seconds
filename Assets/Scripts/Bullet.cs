@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		force = Vector2.left;
+		force = new Vector2(Random.Range(-1, 1f), Random.Range(-1, 1f));
 		rb = GetComponent<Rigidbody2D> ();
 	}
 	
