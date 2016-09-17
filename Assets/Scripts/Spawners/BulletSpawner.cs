@@ -18,7 +18,22 @@ public class BulletSpawner : MonoBehaviour {
 	void GenerateBullets() {
 		for (int i = 0; i < bulletCount; i++) {
 			if (!bullets [i]) {
-				Vector2 pos = new Vector2 (Random.Range (-5f, 5f), Random.Range (-5f, 5f));
+				int dir = Random.Range (0, 4);
+				Vector2 pos = Vector2.zero;
+				if (dir == 0) {
+					pos.x = -6.65f;
+					pos.y = Random.Range (-4.9f, 4.9f);
+				} else if (dir == 1) {
+					pos.x = 6.65f;
+					pos.y = Random.Range (-4.9f, 4.9f);
+				} else if (dir == 2) {
+					pos.x = Random.Range (-6.65f, 6.65f);
+					pos.y = 4.9f;
+				} else if (dir == 3) {
+					pos.x = Random.Range (-6.65f, 6.65f);
+					pos.y = -4.9f;
+				}
+				//Vector2 pos = new Vector2 (Random.Range (-5f, 5f), Random.Range (-5f, 5f));
 				bullets[i] = (GameObject)Instantiate (bulletPrefab, pos, Quaternion.identity);
 				Debug.Log (bullets [i]);
 			}

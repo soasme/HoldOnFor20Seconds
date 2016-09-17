@@ -10,7 +10,14 @@ public class Bullet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		force = new Vector2(Random.Range(-1, 1f), Random.Range(-1, 1f));
+		int dir = Random.Range (0, 2);
+		if (dir == 0) {
+			force = new Vector2 (Random.Range (-1, 1f), Random.Range (-1, 1f));
+		} else {
+			var heading = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
+			var distance = heading.magnitude;
+			force = heading / distance / 2;
+		}
 		rb = GetComponent<Rigidbody2D> ();
 	}
 	
