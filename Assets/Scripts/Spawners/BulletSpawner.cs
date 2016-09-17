@@ -11,11 +11,11 @@ public class BulletSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		bullets = new GameObject[bulletCount];
-		GenerateBullets ();
+		//GenerateBullets ();
 		//bullet = (GameObject)Instantiate (bulletPrefab, new Vector2 (2f, 2f), Quaternion.identity);
 	}
 
-	void GenerateBullets() {
+	public void GenerateBullets() {
 		for (int i = 0; i < bulletCount; i++) {
 			if (!bullets [i]) {
 				int dir = Random.Range (0, 4);
@@ -35,14 +35,15 @@ public class BulletSpawner : MonoBehaviour {
 				}
 				//Vector2 pos = new Vector2 (Random.Range (-5f, 5f), Random.Range (-5f, 5f));
 				bullets[i] = (GameObject)Instantiate (bulletPrefab, pos, Quaternion.identity);
-				Debug.Log (bullets [i]);
 			}
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		GenerateBullets ();
-		//Debug.Log (bullet);
+		GameObject player = GameObject.FindGameObjectWithTag ("Player");
+		if (player) {
+			GenerateBullets ();
+		}
 	}
 }

@@ -11,10 +11,13 @@ public class Bullet : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		int dir = Random.Range (0, 2);
-		if (dir == 0) {
+		GameObject player = GameObject.FindGameObjectWithTag ("Player");
+		if (!player) {
+			force = Vector2.zero;
+		} else if (dir == 0) {
 			force = new Vector2 (Random.Range (-1, 1f), Random.Range (-1, 1f));
 		} else {
-			var heading = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
+			var heading = player.transform.position - transform.position;
 			var distance = heading.magnitude;
 			force = heading / distance / 2;
 		}
@@ -30,7 +33,11 @@ public class Bullet : MonoBehaviour {
 		if (other.gameObject.tag == "Bullet") {
 			return;
 		} else if (other.gameObject.tag == "Player") {
-			Debug.Log ("die logic");
+			Destroy (other.gameObject);
+			foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet")) {
+				Destroy (bullet);
+			}
+			//Destroy (other.gameObject);
 		}
 		// Always destroy old bullet and respawn a new one,
 		// If old bullet detected collision.
