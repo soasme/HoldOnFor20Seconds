@@ -20,7 +20,9 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag == "Player") {
+		if (other.gameObject.tag == "Bullet") {
+			return;
+		} else if (other.gameObject.tag == "Player") {
 			Debug.Log ("die logic");
 		}
 		// Always destroy old bullet and respawn a new one,
